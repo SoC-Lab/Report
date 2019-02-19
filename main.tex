@@ -1,0 +1,71 @@
+\documentclass[]{article}
+
+\usepackage{url}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[section]{placeins}
+\usepackage[justification=centering]{caption}
+\usepackage{calc}
+\usepackage[nomessages]{fp}
+\usepackage{parskip}    
+\usepackage{bold-extra} % that's new
+
+\usepackage[T1]{fontenc} % optional
+\usepackage{type1cm}
+
+\usepackage[utf8]{inputenc}
+\usepackage[cmintegrals]{newtxmath}
+\usepackage{bm} % optional
+
+\usepackage{glossaries}
+
+\usetikzlibrary{shapes, arrows}
+
+%Used for the colors
+\makeatletter
+\def\@hex@@Hex#1%
+ {\if a#1A\else \if b#1B\else \if c#1C\else \if d#1D\else
+  \if e#1E\else \if f#1F\else #1\fi\fi\fi\fi\fi\fi \@hex@Hex}
+\makeatother
+
+\DeclareUnicodeCharacter{2011}{-}
+
+\makeglossaries
+\loadglsentries{glsEntries}
+
+%\usetikzlibrary{external}
+%\tikzexternalize % activate!
+
+\newlength{\smallColumnWidth}
+\setlength{\smallColumnWidth}{\columnwidth-2cm}%
+
+
+\definecolor{cCyan}{HTML}{8dd3c7}
+\definecolor{cYellow}{HTML}{ffffb3}
+\definecolor{cFlieder}{HTML}{bebada}
+\definecolor{cRed}{HTML}{fb8072}
+\definecolor{cBlue}{HTML}{80b1d3}
+\definecolor{cOrange}{HTML}{fdb462}
+\definecolor{cGreen}{HTML}{b3de69}
+\definecolor{cPink}{HTML}{fccde5}
+
+\title{Failsafe ECU through dynamic partial-reconfiguration in FPGAs}
+\author{Constantin Schieber, 01228774\\Rupert Schorn, XXXXXXX\\Andreas Hirtenlehner, XXXXXXXX\\Peter Schober, XXXXXX}
+
+\begin{document}
+\maketitle
+\newpage
+\input{./tex/Introduction.tex}
+\input{./tex/CortexM1.tex}
+\input{./tex/Bus.tex}
+\input{./tex/PartialReconfiguration}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,SoCLabor}
+
+\end{document}
+
