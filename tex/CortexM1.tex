@@ -4,9 +4,14 @@ Description of the setup of Cortex M1 and Cortex M3 Cores. \cite{arm_arm_2018} \
 
 \subsection{Usage of the Keil Toolchain}
 
-Link to tutorial enough? Maybe most basic steps (e.g. adpation of arty project for our needs). \cite{noauthor_getting_nodate}
+Link to tutorial enough? Maybe most basic steps (e.g. adaption of arty project for our needs). \cite{noauthor_getting_nodate}
 
 \subsection{Usage of Cortex M1 in Vivado}
+
+Only global implementation / synthesis runs are permitted to obtain a working bitstream.
+If OOC (Out of Context) runs are used, everything except for the Cortex M1 will work fine. 
+The Cortex M1 will enter a hard-fault state which does not allow recovery. 
+This is indicated by a high bit on the \textit{Lockup} port of the processor.
 
 Also trivial, follow tutorial that is provided on ARM Website and adapt to own needs.
 

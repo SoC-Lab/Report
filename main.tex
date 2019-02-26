@@ -16,7 +16,8 @@
 \usepackage{bold-extra} % that's new
 
 \usepackage[T1]{fontenc} % optional
-\usepackage{type1cm}
+\usepackage{lmodern}
+%\usepackage{type1cm}
 
 \usepackage[utf8]{inputenc}
 \usepackage[cmintegrals]{newtxmath}
@@ -60,10 +61,13 @@
 \begin{document}
 \maketitle
 \newpage
+
 \input{./tex/Introduction.tex}
 \input{./tex/CortexM1.tex}
 \input{./tex/Bus.tex}
 \input{./tex/PartialReconfiguration}
+\input{./tex/Organization}
+
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,SoCLabor}
 
