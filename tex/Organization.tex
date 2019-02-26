@@ -4,22 +4,39 @@
  \subsubsection{Cortex M1} 
  Evaluation of the provided Cortex-M1 from ARM and adaption of the provided toolchain to our needs. 
 
- Creation of a working stand-alone example, creation and integration of working IP-Packages for the Cortex-M1
- \subsubsection{Partial Reconfiguration} 
+ Creation of a working stand-alone example, creation and integration of working IP-Packages for the Cortex-M1.
+
+ Provision of partial reconfiguration eligible IP-Packages.
+ \subsubsection{Partial Reconfiguration}
+ Evaluation of the partial reconfiguration flow in Vivado (project vs. script based).
+
+ Determination of restrictions that come with partial reconfiguration e.g. less flexible and limited use of clock spines within the pr region, no operations on clocks within the pr region, constant interface over all implementations, placement / alignment restrictions, naming conventions and conflicts for custom IP-Packages, binding usage of .vhd files instead of block diagrams with regards to pr modules. 
+
+ Evaluation with Microblaze processors, as Cortex M1 is only available from the start of November 2018.
+
+ Generation of a Bootable Image that includes the partial reconfiguration bitstreams in a binary format.
+
+ Modification of the Zynq processing system on the Zedboard to allow for the usage of the ICAP instead of the PCAP, loading the partial bitstreams into DDR memory from the SD-Card.
+
+ Evaluation of the pr-controller and the available trigger sources / types.
  \subsubsection{Bus Design}
- \subsubsection{Hardware}   
+ Protocol, Standard, Implementation on FPGA / Cortex.
+ \subsubsection{Hardware}
+ Evaluation of hardware types (e.g. Nucleo Boards), possible connection to the Zedboard, CAN-Driver boards. 
 \subsection{Estimated Contribution}
 Contribution to the project was roughly the same for each group member.
+Table \ref{tbl:AssignedTasks} shows the tasks and how they were assigned to the different team members.
     \begin{table}
         \centering
 \begin{tabular}{ l | c c c c c}
  Task & Hirtenlehner & Schieber & Schober & Schorn\\ 
  \hline
-Cortex M1       & X & X & X & \\
-Partial Reconf. & X & X & & \\
-Bus Design      & & & & X\\
-Hardware        & X & & & X\\
-Mbed OS         & X & & & X\\
+Cortex M1       & X & X & X &   \\
+Partial Reconf. &   & X &   &   \\
+Bus Design      &   &   &   & X \\
+Hardware        & X &   &   & X \\
+Mbed OS         & X &   &   & X \\
 \end{tabular}
 \caption{Distribution of tasks within the group}
+\label{tbl:AssignedTasks}
 \end{table}
