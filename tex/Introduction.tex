@@ -6,6 +6,7 @@
 \end{figure}
 
 In this lab, fail-safe mechanisms for \glspl{ECU} are explored on the basis of \gls{PR} in \glspl{FPGA}.
+
 The introduced design contains typical characteristics of an automotive system.
 Communication of the different sub-systems is realized with a bus and connects the \gls{FPGA} to the \glspl{ECU} that handle operations during normal conditions. 
 \glspl{ECU} are monitored by a bus monitor in the \gls{FPGA} for nominal operation characteristics and can be replaced by the instantiation of the very same \gls{ECU} within the \gls{FPGA} in case of failure.
@@ -14,6 +15,12 @@ Our \glspl{ECU} are based on the Cortex-M1, an ARM-based microcontroller that be
 By using a common hardware base we were able to streamline the development of the control-software which enables a faster development process and reduces the overhead of functional verification.
  
 Brief overview, problem statement and final outcome.
+
+\subsection{Design Overview}
+
+$\#TODO$: Graphic of the bus and its connected part-takers
+
+$\#TODO$: State Diagram for the different part-takers
 
 \subsection{Required Tools and packages}
 
