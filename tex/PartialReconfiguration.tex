@@ -5,12 +5,28 @@ This section reasons about design choices and encountered obstacles during the d
 \gls{PR} does impose some limitations on the design process, a brief description of the encountered limitations and how they were handled is given in the following.
 
 \subsubsection{No block diagram support}
-\subsubsection{PCAP / ICAP on the Zynq-7000}
-\subsubsection{ICAP primitive instantiation}
+The \gls{PR} workflow as implemented by Xilinx in Vivado does not allow the \gls{RP} to be present in a block diagram.
+Only hdl files are eligible for the \gls{PR} process.
+
+To solve this problem without the loss of comfort that is provided by the usage of block diagrams (mainly the connection of different signals between modules) we decided to transfer our Cortex Module into an \gls{IP}-Package.
+This \gls{IP}-Package can then be instantiated as a \gls{RTL} module alongside an existing block diagram.
+Only the signal connections between the \gls{IP} and the block diagram have to be declared manually then.
+
+\begin{tikzpicture}[
+    node distance = 0mm and 12mm,% for distance between nodes
+       box/.style = {draw, very thick, minimum width=5em}% nodes style
+    ]
+    \node (n1) [box] {Static Block Diagram};
+    \node (n2) [box, below right=of n1.north east] {glue\_top.vhd};
+    \node (n3) [box, below right=of n2.north east] {Reconfigurable IP-Package};
+    \draw[<->] (n1) edge (n2);
+    \draw[<->] (n2) edge (n3);
+\end{tikzpicture}
+\subsubsection{\gls{PCAP} / \gls{ICAP} on the Zynq-7000}
+
+\subsubsection{\gls{ICAP} primitive instantiation}
 \subsubsection{Read from SD-Card}
-
 What is partially reconfigured - Cortex, uart, IIC.
-
 Why not use AXI?
 
 \subsection{Integration Overview}
