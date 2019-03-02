@@ -12,16 +12,19 @@ To solve this problem without the loss of comfort that is provided by the usage 
 This \gls{IP}-Package can then be instantiated as a \gls{RTL} module alongside an existing block diagram.
 Only the signal connections between the \gls{IP} and the block diagram have to be declared manually then.
 
+\begin{figure}[ht]
 \begin{tikzpicture}[
     node distance = 0mm and 12mm,% for distance between nodes
        box/.style = {draw, very thick, minimum width=5em}% nodes style
     ]
-    \node (n1) [box] {Static Block Diagram};
-    \node (n2) [box, below right=of n1.north east] {glue\_top.vhd};
-    \node (n3) [box, below right=of n2.north east] {Reconfigurable IP-Package};
+    \node (n1) [draw] {Static Block Diagram};
+    \node (n2) [draw, below right=of n1.north east] {glue\_top.vhd};
+    \node (n3) [draw, below right=of n2.north east] {Reconfigurable IP-Package};
     \draw[<->] (n1) edge (n2);
     \draw[<->] (n2) edge (n3);
 \end{tikzpicture}
+\caption{Enable \gls{PR} by the separation of the block diagram and the \gls{RP}}\label{fig:blockDiagramGlue}
+\end{figure}
 \subsubsection{\gls{PCAP} / \gls{ICAP} on the Zynq-7000}
 
 \subsubsection{\gls{ICAP} primitive instantiation}
