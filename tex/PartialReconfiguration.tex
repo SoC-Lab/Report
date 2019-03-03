@@ -25,10 +25,63 @@ Only the signal connections between the \gls{IP} and the block diagram have to b
 \end{tikzpicture}
 \caption{Enable \gls{PR} by the separation of the block diagram and the \gls{RP}}\label{fig:blockDiagramGlue}
 \end{figure}
+
+Due to this, the originally planned AXI-Bus interface for the \gls{RP} needs to be connected manually. 
+This has proven to be very error-prone in earlier evaluation steps and was then replaced by an interface that only exposed required signals.
+An AXI-Bus interface may very well work though, as it probably failed due to other, unrelated errors.
+  
+
+
+\subsubsection{Global synthesis / implementation runs are mandatory}
+\gls{PR} works with global synthesis and implementation runs only.
+This imposes restrictions on the naming of files within packages. 
+While \gls{OOC} runs allow the same instance names for different IPs a global run requires distinct file and instance names for everything that is included in the project.
+
+Global synthesis and implementation runs are also necessary to include the memory initialization file for the Cortex processor. 
+
 \subsubsection{\gls{PCAP} / \gls{ICAP} on the Zynq-7000}
+As the Zynq-7000 was used for the prototyping process our first choice was the usage of the \gls{PCAP} for writing partial bitstreams to the \gls{FPGA} as it is the most straight forward (and well documented) way for this platform.
+
+Due to design considerations (scaling well for production vs fast prototyping) a switch to using the \gls{ICAP} was made.
+For this, the \gls{PCAP} needs to be actively deactivated after the boot of the processing system (\cite{zynq_7000_technical_manual}, page 218).
 
 \subsubsection{\gls{ICAP} primitive instantiation}
+Instantiation of the \gls{ICAP} as a hardware primitive in VHDL is documented in the 7series libraries guide (\cite{7series_libraries_guide}, page 178).
+For completeness sake, the component definition is listed below as it does not exist directly in the documentation.
+The comments the generic parameters that were used in this project.
+\lstset{language=vhdl}
+\begin{lstlisting}[
+    basicstyle=\small, %or \small or \footnotesize etc.
+    caption={Component definition of the ICAPE2 hardware primtive},
+    captionpos=b
+]
+component ICAPE2 is
+generic (
+    DEVICE_ID   : std_logic_vector(31 downto 0); -- X"23727093" 
+    ICAP_WIDTH  : string; --"X32"
+    SIM_CFG_FILE_NAME 	: string -- "None"
+);   
+port (
+    O 		: out std_logic_vector(31 downto 0);
+    CLK 	: in std_logic;
+    CSIB 	: in std_logic;
+    I 		: in std_logic_vector(31 downto 0);
+    RDWRB 	: inout std_logic
+);
+end component ICAPE2;
+\end{lstlisting}
 \subsubsection{Read from SD-Card}
+The SD-Card was used to provide a bootable image with the default configuration and all partial bitstreams.
+Reads from the SD-Card may fail, resulting in a non-functioning or only partially functioning system.
+The following steps should be performed to trouble-shoot the problem. 
+
+\begin{itemize}
+    \item If the system is working in its original configuration and only fails the partial reconfiguration, the file names of the bitstreams should be checked. Only a maximum of 8 characters (+3 for the extension) for the file name are permitted by default. 
+    \item Slow (e.g. overwriting everything with zeros) reformat of the SD-Card may be tried.
+    \item Smaller SD-Card should be tried.
+\end{itemize}
+
+
 What is partially reconfigured - Cortex, uart, IIC.
 Why not use AXI?
 

@@ -23,6 +23,9 @@
 \usepackage[cmintegrals]{newtxmath}
 \usepackage{bm} % optional
 
+\usepackage{listings}
+\usepackage{listings-ext}
+
 \usepackage{glossaries}
 \usetikzlibrary{positioning}% for positioning of nodes
 \usetikzlibrary{shapes, arrows, shapes.geometric, shadows,positioning}
@@ -56,7 +59,7 @@
 \definecolor{cPink}{HTML}{fccde5}
 
 \title{Failsafe ECU through dynamic partial-reconfiguration in FPGAs}
-\author{Constantin Schieber, 01228774\\Rupert Schorn, 01325700\\Andreas Hirtenlehner, XXXXXXXX\\Peter Schober, XXXXXX}
+\author{Constantin Schieber, 01228774\\Rupert Schorn, 01325700\\Andreas Hirtenlehner, 01327273\\Peter Schober, XXXXXX}
 
 \begin{document}
 \maketitle
@@ -65,8 +68,10 @@
 \input{./tex/Introduction.tex}
 \input{./tex/CortexM1.tex}
 \input{./tex/Bus.tex}
-\input{./tex/PartialReconfiguration}
-\input{./tex/Organization}
+\input{./tex/PartialReconfiguration.tex}
+%\input{./tex/Organization}
+\input{./tex/Results.tex}
+\input{./tex/Conclusion.tex}
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,SoCLabor}
