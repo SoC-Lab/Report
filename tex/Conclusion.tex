@@ -1,3 +1,14 @@
 \section{Conclusion}
+This work has explored the possibility of using partial reconfiguration in \glspl{FPGA} to provide efficient redundancy in an automotive system.
+Instead of providing a redundant hardware entity for every critical module, one single \gls{FPGA} provides dynamic redundancy for each of these modules.
+To avoid over-commitment with regards to resource usage (space and power) partial reconfiguration is used.
+By using the newly available Cortex M1 IPs, a streamlined software development process is possible. 
+The same software can be executed on the cores in the \gls{FPGA} as well as on the actual hardware with minimal adaptions in the build-process.
+This reduces the amount of testing and tool-chain adaptions that need to be performed.
+We demonstrated these concepts on the Zynq-7000 and with three Cortex M1 \glspl{CPU} that were connected with a bus.
 
 \subsection{Future Work}
+Based on this work a more heterogeneous set of critical hardware could be provided with redundancy. 
+A good first step would be to include the Cortex M3 CPU that couldn't be included in this project due to time constraints.
+The bus monitor could be extended with a more sophisticated fault detection algorithm, which could also mean to employ a more sophisticated bus protocol.
+Measurements with regards to the system performance (e.g. time to reconfigure, time to detect fault, time to mitigate fault, power usage ...) should be considered also.  

@@ -29,8 +29,6 @@ Only the signal connections between the \gls{IP} and the block diagram have to b
 Due to this, the originally planned AXI-Bus interface for the \gls{RP} needs to be connected manually. 
 This has proven to be very error-prone in earlier evaluation steps and was then replaced by an interface that only exposed required signals.
 An AXI-Bus interface may very well work though, as it probably failed due to other, unrelated errors.
-  
-
 
 \subsubsection{Global synthesis / implementation runs are mandatory}
 \gls{PR} works with global synthesis and implementation runs only.
@@ -80,16 +78,49 @@ The following steps should be performed to trouble-shoot the problem.
     \item Slow (e.g. overwriting everything with zeros) reformat of the SD-Card may be tried.
     \item Smaller SD-Card should be tried.
 \end{itemize}
-
-
-What is partially reconfigured - Cortex, uart, IIC.
-Why not use AXI?
-
 \subsection{Integration Overview}
+Due to our problems with the AXI-Bus it was decided to put all relevant peripheral communication into the \gls{RP}.
+This eliminates the need of implementing an AXI-Interface at the cost of an increased size of the \gls{RP}.
+
+The following modules are included in the \gls{RP}:
+\begin{itemize}
+    \item  AXI-GPIO
+    \item  AXI-UartLite
+    \item  AXI-Timer
+    \item  AXI-IIC
+    \item  Cortex M1
+\end{itemize}
+
+\begin{figure}[ht]
+    \centering
+\begin{tikzpicture}[
+    node distance = 7mm and 12mm,% for distance between nodes
+       box/.style = {draw, minimum width=7em}% nodes style
+    ]
+    \node (n1) [box] {PS};
+    \node (SD) [box, right=of n1.east] {SD-Card};
+    \node (n2) [box, below =of n1.south] {DDR};
+    \node (n3) [box, below =of n2.south] {PR-Controller};
+    \node (n4) [box, below =of n3.south] {ICAP};
+    \node (n5) [box, right =of n4.east] {FPGA Memory};
+    \draw[->] (n1) edge (n2);
+    \draw[->] (n2) edge (n3);
+    \draw[<-] (n1) edge (SD);
+    \draw[<->] (n3) edge (n4);
+    \draw[->] (n4) edge (n5);
+\end{tikzpicture}
+\caption{Data path for loading a partial bitstream}\label{fig:prIntegration}
+\end{figure}
 \cite{xilinx_vivado_2018-1}, \cite{xilinx_vivado_2018}
 Usage of \gls{ICAP}.
-
 How is the Zynq still used - Loading images and binary blobs from sd card into DDR.
-
-\subsection{Packaged IP}
-Why is the PR IP Packaged, how was it done? \cite{xilinx_ug1118-vivado-creating-packaging-custom-ip.pdf_nodate}
+What is partially reconfigured - Cortex, uart, IIC.
+Why not use AXI?
+\subsubsection{Packaged IP}
+The \gls{PR} IP was packaged according to the guide in \cite{xilinx_ug1118-vivado-creating-packaging-custom-ip.pdf_nodate}.
+To avoid naming conflicts, all block designs of the different IPs need to be named differently before this process.
+\subsubsection{Loading the \gls{PR} module}
+The module is loaded through the \gls{PR}-Controller IP that is provided by Vivado. 
+This module is connected via the AXI memory interface and loads the partial bitstream from DDR.
+At start-up, the partial bitstreams are loaded form the SD-Card into the DDR through the Zynq \gls{PS} as it already needs to be used for the deactivation of the \gls{PCAP}.
+Figure \ref{fig:prIntegration} shows how the different modules and memory entities are related to each other.
