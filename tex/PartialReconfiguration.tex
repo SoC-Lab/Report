@@ -1,10 +1,10 @@
-\section{Partial Reconfiguration}
+\chapter{Partial Reconfiguration}
 This section reasons about design choices and encountered obstacles during the development process.
 
-\subsection{Limitations imposed by partial reconfiguration}
+\section{Limitations imposed by partial reconfiguration}
 \gls{PR} does impose some limitations on the design process, a brief description of the encountered limitations and how they were handled is given in the following.
 
-\subsubsection{No block diagram support}
+\subsection{No block diagram support}
 The \gls{PR} workflow as implemented by Xilinx in Vivado does not allow the \gls{RP} to be present in a block diagram.
 Only hdl files are eligible for the \gls{PR} process.
 
@@ -30,20 +30,20 @@ Due to this, the originally planned AXI-Bus interface for the \gls{RP} needs to 
 This has proven to be very error-prone in earlier evaluation steps and was then replaced by an interface that only exposed required signals.
 An AXI-Bus interface may very well work though, as it probably failed due to other, unrelated errors.
 
-\subsubsection{Global synthesis / implementation runs are mandatory}
+\subsection{Global synthesis / implementation runs are mandatory}
 \gls{PR} works with global synthesis and implementation runs only.
 This imposes restrictions on the naming of files within packages. 
 While \gls{OOC} runs allow the same instance names for different IPs a global run requires distinct file and instance names for everything that is included in the project.
 
 Global synthesis and implementation runs are also necessary to include the memory initialization file for the Cortex processor. 
 
-\subsubsection{\gls{PCAP} / \gls{ICAP} on the Zynq-7000}
+\subsection{\gls{PCAP} / \gls{ICAP} on the Zynq-7000}
 As the Zynq-7000 was used for the prototyping process our first choice was the usage of the \gls{PCAP} for writing partial bitstreams to the \gls{FPGA} as it is the most straight forward (and well documented) way for this platform.
 
 Due to design considerations (scaling well for production vs fast prototyping) a switch to using the \gls{ICAP} was made.
 For this, the \gls{PCAP} needs to be actively deactivated after the boot of the processing system (\cite{zynq_7000_technical_manual}, page 218).
 
-\subsubsection{\gls{ICAP} primitive instantiation}
+\subsection{\gls{ICAP} primitive instantiation}
 Instantiation of the \gls{ICAP} as a hardware primitive in VHDL is documented in the 7series libraries guide (\cite{7series_libraries_guide}, page 178).
 For completeness sake, the component definition is listed below as it does not exist directly in the documentation.
 The comments the generic parameters that were used in this project.
@@ -68,7 +68,7 @@ port (
 );
 end component ICAPE2;
 \end{lstlisting}
-\subsubsection{Read from SD-Card}
+\subsection{Read from SD-Card}
 The SD-Card was used to provide a bootable image with the default configuration and all partial bitstreams.
 Reads from the SD-Card may fail, resulting in a non-functioning or only partially functioning system.
 The following steps should be performed to trouble-shoot the problem. 
@@ -78,7 +78,7 @@ The following steps should be performed to trouble-shoot the problem.
     \item Slow (e.g. overwriting everything with zeros) reformat of the SD-Card may be tried.
     \item Smaller SD-Card should be tried.
 \end{itemize}
-\subsection{Integration Overview}
+\section{Integration Overview}
 Due to our problems with the AXI-Bus it was decided to put all relevant peripheral communication into the \gls{RP}.
 This eliminates the need of implementing an AXI-Interface at the cost of an increased size of the \gls{RP}.
 
@@ -116,10 +116,10 @@ Usage of \gls{ICAP}.
 How is the Zynq still used - Loading images and binary blobs from sd card into DDR.
 What is partially reconfigured - Cortex, uart, IIC.
 Why not use AXI?
-\subsubsection{Packaged IP}
+\subsection{Packaged IP}
 The \gls{PR} IP was packaged according to the guide in \cite{xilinx_ug1118-vivado-creating-packaging-custom-ip.pdf_nodate}.
 To avoid naming conflicts, all block designs of the different IPs need to be named differently before this process.
-\subsubsection{Loading the \gls{PR} module}
+\subsection{Loading the \gls{PR} module}
 The module is loaded through the \gls{PR}-Controller IP that is provided by Vivado. 
 This module is connected via the AXI memory interface and loads the partial bitstream from DDR.
 At start-up, the partial bitstreams are loaded form the SD-Card into the DDR through the Zynq \gls{PS} as it already needs to be used for the deactivation of the \gls{PCAP}.
