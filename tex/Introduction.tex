@@ -2,8 +2,6 @@
 
 Our \glspl{ECU} are based on ARM Cortex-M1/M3 controllers. Both of them became recently available as an \gls{IP}-package for Xilinx based \glspl{FPGA}.
 By using a common hardware base and a common software middleware we were able to streamline the development of the control-software which enables a faster development process for new applications and reduces the overhead of their functional verification.
- 
-Brief overview, problem statement and final outcome.
 
 \section{Design Overview}
 
@@ -37,11 +35,16 @@ After finishing the reconfiguration, normal operation takes over again (see figu
     \caption{Sequence diagram for \gls{MCU} failure}\label{fig:sequenceMCUFailure}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/hw_setup.jpg}
+    \caption{Zedboard and STM32 hardware setup}\label{fig:setup}
+\end{figure}
+
 \section{Required tools, \glspl{IP} and packages}
-TODO: licenses
+
 \begin{itemize}
-    \item Vivado 2018.3
-    \item Vivado 2018.2
+    \item Vivado 2018.3 (with Partial Reconfiguration license)
     \item Keil Microcontroller Development Kit (Windows only)
     \item ARM Cortex M1 IP for Vivado
     \item UART IP by Martin Mosbeck
