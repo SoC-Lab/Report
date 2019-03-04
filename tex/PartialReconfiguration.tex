@@ -48,11 +48,7 @@ Instantiation of the \gls{ICAP} as a hardware primitive in VHDL is documented in
 For completeness sake, the component definition is listed below as it does not exist directly in the documentation.
 The comments the generic parameters that were used in this project.
 \lstset{language=vhdl}
-\begin{lstlisting}[
-    basicstyle=\small, %or \small or \footnotesize etc.
-    caption={Component definition of the ICAPE2 hardware primtive},
-    captionpos=b
-]
+\begin{lstlisting}
 component ICAPE2 is
 generic (
     DEVICE_ID   : std_logic_vector(31 downto 0); -- X"23727093" 
@@ -72,7 +68,6 @@ end component ICAPE2;
 The SD-Card was used to provide a bootable image with the default configuration and all partial bitstreams.
 Reads from the SD-Card may fail, resulting in a non-functioning or only partially functioning system.
 The following steps should be performed to trouble-shoot the problem. 
-
 \begin{itemize}
     \item If the system is working in its original configuration and only fails the partial reconfiguration, the file names of the bitstreams should be checked. Only a maximum of 8 characters (+3 for the extension) for the file name are permitted by default. 
     \item Slow (e.g. overwriting everything with zeros) reformat of the SD-Card may be tried.
