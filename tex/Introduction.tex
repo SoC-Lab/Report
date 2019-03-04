@@ -1,18 +1,11 @@
-\section{Introduction}
-
-
-In this lab, fail-safe mechanisms for \glspl{ECU} are explored on the basis of \gls{PR} in \glspl{FPGA}.
-
-The introduced design contains typical characteristics of an automotive system.
-Communication between the different sub-systems is realized by a specific link (including protocol) and connects the \gls{FPGA} to the \glspl{ECU} that handle operations during normal conditions. 
-\glspl{ECU} are monitored by a bus monitor in the \gls{FPGA} for nominal operation characteristics and can be replaced by the instantiation of the very same \gls{ECU} within the \gls{FPGA} in case of failure.
+\chapter{Introduction}
 
 Our \glspl{ECU} are based on ARM Cortex-M1/M3 controllers. Both of them became recently available as an \gls{IP}-package for Xilinx based \glspl{FPGA}.
 By using a common hardware base and a common software middleware we were able to streamline the development of the control-software which enables a faster development process for new applications and reduces the overhead of their functional verification.
  
 Brief overview, problem statement and final outcome.
 
-\subsection{Design Overview}
+\section{Design Overview}
 
 The assumed system consists of three regular separate control units that are connected through a communication link. Figure \ref{fig:basicDesign} shows the basic components of the assumed design.
 
@@ -44,7 +37,7 @@ After finishing the reconfiguration, normal operation takes over again (see figu
     \caption{Sequence diagram for \gls{MCU} failure}\label{fig:sequenceMCUFailure}
 \end{figure}
 
-\subsection{Required tools, \glspl{IP} and packages}
+\section{Required tools, \glspl{IP} and packages}
 TODO: licenses
 \begin{itemize}
     \item Vivado 2018.3

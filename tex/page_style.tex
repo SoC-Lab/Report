@@ -1,0 +1,50 @@
+\hypersetup{colorlinks,linkcolor=[rgb]{0,0.4,0.6},filecolor=red,urlcolor=[rgb]{0,0.4,0.6},citecolor=[rgb]{0,0.4,0.6}}
+
+% sets the pagelayout
+%\setlength{\oddsidemargin}{4mm}
+%\setlength{\evensidemargin}{-6mm}
+%\setlength{\textwidth}{162mm} 
+%\setlength{\textheight}{230mm}
+%\setlength{\topmargin}{-5mm}
+
+\pagestyle{fancy}
+
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyhead[RO]{\rightmark}
+\fancyhead[LE]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+% no headers on chapter pages
+\fancypagestyle{plain}{%
+    \fancyhf{} % clear all header and footer fields
+    \fancyfoot[C]{\thepage} % except the center
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% no numbers on part pages
+\renewcommand*{\partpagestyle}{empty}
+
+% sonst können sehr große Abstände zwischen Überschriften und Zeilen vorkommen
+\raggedbottom
+
+% 1.5 Facher Zeilenabstand
+\onehalfspacing
+
+% no numbers on part pages in TOC
+%\makeatletter
+%\let\partbackup\l@part
+%\renewcommand*\l@part[2]{\partbackup{#1}{}}
+%\makeatother
+
+% vertical space under subsubsection
+%\titlespacing{\subsubsection}{0pt}{\parskip}{-\parskip}
+
+%vertical destance between paragraphs
+%\setlength{\parskip}{0.5\baselineskip}
+
+%vertical distance between bib items
+%\setlength\bibitemsep{0.5\baselineskip}
+
+

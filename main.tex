@@ -1,10 +1,16 @@
-\documentclass[]{article}
+\documentclass[a4paper, 11pt]{scrreprt}
 
+\usepackage[a4paper, top=2cm]{geometry} % Use A4 paper size
+\usepackage{color} % Required for color customization
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
 \usepackage{url}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{tikz}
@@ -14,10 +20,13 @@
 \usepackage[nomessages]{fp}
 \usepackage{parskip}    
 \usepackage{bold-extra} % that's new
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{lmodern}
 
 \usepackage[T1]{fontenc} % optional
 \usepackage{lmodern}
-%\usepackage{type1cm}
 
 \usepackage[utf8]{inputenc}
 \usepackage[cmintegrals]{newtxmath}
@@ -30,12 +39,17 @@
 \usetikzlibrary{positioning}% for positioning of nodes
 \usetikzlibrary{shapes, arrows, shapes.geometric, shadows,positioning}
 
-%Used for the colors
-\makeatletter
-\def\@hex@@Hex#1%
- {\if a#1A\else \if b#1B\else \if c#1C\else \if d#1D\else
-  \if e#1E\else \if f#1F\else #1\fi\fi\fi\fi\fi\fi \@hex@Hex}
-\makeatother
+\usepackage[
+    pdftitle={Failsafe ECU through Dynamic Partial Reconfiguration in FPGAs},
+    pdfauthor={Constantin Schieber, Rupert Schorn, Andreas Hirtenlehner, Peter Schober},
+    pdfsubject={Documentation},
+    colorlinks=true,
+    hyperindex=true,
+    plainpages=false,
+    pdfpagelabels=true,
+    bookmarksopen=false,
+    linktocpage=true
+]{hyperref}
 
 \DeclareUnicodeCharacter{2011}{-}
 
@@ -48,22 +62,23 @@
 \newlength{\smallColumnWidth}
 \setlength{\smallColumnWidth}{\columnwidth-2cm}%
 
-
-\definecolor{cCyan}{HTML}{8dd3c7}
-\definecolor{cYellow}{HTML}{ffffb3}
-\definecolor{cFlieder}{HTML}{bebada}
-\definecolor{cRed}{HTML}{fb8072}
-\definecolor{cBlue}{HTML}{80b1d3}
-\definecolor{cOrange}{HTML}{fdb462}
-\definecolor{cGreen}{HTML}{b3de69}
-\definecolor{cPink}{HTML}{fccde5}
-
-\title{Failsafe ECU through dynamic partial-reconfiguration in FPGAs}
-\author{Constantin Schieber, 01228774\\Rupert Schorn, 01325700\\Andreas Hirtenlehner, 01327273\\Peter Schober, XXXXXX}
+\input{./tex/page_style.tex}
 
 \begin{document}
-\maketitle
-\newpage
+
+\pagestyle{plain}
+\input{./tex/Title.tex}
+\cleardoublepage
+\pagenumbering{Roman} 
+
+{
+  \tableofcontents
+  \newpage
+  \input{./tex/Abstract.tex}
+  \cleardoublepage
+}
+
+\pagenumbering{arabic}
 
 \input{./tex/Introduction.tex}
 \input{./tex/CortexM1.tex}
