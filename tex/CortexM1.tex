@@ -1,10 +1,6 @@
-\chapter{Cortex M1 / M3}
+\chapter{Cortex M1 on Xilinx}
 
-Description of the setup of Cortex M1 and Cortex M3 Cores. \cite{arm_arm_2018} \cite{arm_cortex-m1_nodate}
-
-\section{Usage of the Keil Toolchain}
-
-Link to tutorial enough? Maybe most basic steps (e.g. adaption of arty project for our needs). \cite{noauthor_getting_nodate}
+Description of the setup of the Cortex M1 core. \cite{arm_arm_2018} \cite{arm_cortex-m1_nodate}
 
 \section{Usage of Cortex M1 in Vivado}
 
@@ -17,15 +13,30 @@ Also trivial, follow tutorial that is provided on ARM Website and adapt to own n
 
 \subsection{Code via Memory Initialization File}
 
-File is bound to synthesis process, how to change it...
+To update the Memory Initialization File for a core, a new package with the updated \textit{bram\_a7.hex} file in the corresponding core (\textit{/cores/cm1\_*/m1\_for\_arty\_a7.srcs/\\sources\_1/imports/m1\_for\_arty\_a7/m1\_for\_arty\_a7/} \cite{fpga_design}) has to be generated and the \gls{IP} in the block design has to be updated.
 
 \section{How to mbed OS}
+To achieve a common code base for the application code, Mbed OS, a \gls{RTOS} from ARM, was used (Fig \ref{fig:mbed}). 
+Since there is no support for the Xilinx Cortex M1 core, the \gls{BSP} provided by Xilinx was ported to Mbed OS \cite{mbed_port}. 
+The port includes the \gls{RTOS} kernel and the GPIO and UART modules. 
+The firmware for our \gls{FPGA} design \cite{fpga_design} can be found on GitHub \cite{firmware}. 
+For using Mbed OS with a new design, the \gls{BSP} has to be exported from the Vivado SDK and copied to \textit{/mbed-os/targets/TARGET\_Xilinx/TARGET\_XC7Z020/device/standalone\_bsp/} in \cite{firmware}.
 
-How was the Cortex M1 Project adapted to support the Mbed OS?
-What is gained through the usage of mbed OS?
+\begin{figure}[ht]
+    \centering
+\begin{tikzpicture}[
+    node distance = 7mm and 12mm,% for distance between nodes
+       box/.style = {draw, minimum width=12em}% nodes style
+    ]
+    \node (app) [box] {Application};
+    \node (mbed) [box, below=of app.south] {ARM Mbed OS};
+    \node (ph) [below=of mbed.south] {};
+    \node (xilinx) [box, left=of ph.west] {Xilinx Cortex M1 core};
+    \node (stm) [box, right=of ph.east] {STM32 MCU};
+    \draw[->] (app) edge (mbed);
+    \draw[->] (mbed) edge (xilinx);
+    \draw[->] (mbed) edge (stm);
+\end{tikzpicture}
+\caption{Software structure.}\label{fig:mbed}
+\end{figure}
 
-\section{Implemented Functionality on the Cortex M1}
-
-How are the UART and IIC peripherals supported in the source code, which libraries are used, interrupt based or not, performance?
-
-Show highlights of the code?
