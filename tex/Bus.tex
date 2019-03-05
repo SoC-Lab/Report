@@ -5,6 +5,8 @@ This section describes the communication protocol used for command and data exch
 \section{Protocol}
 \label{sec:protocol}
 
+In initial system designs the usage of the CAN protocol was intended. This approach was discarded, because no license for the Xilinx CAN IP core could be obtained. Since no stable open source CAN IP core was found, a new protocol was defined.
+
 In our approach a simple master-slave protocol was defined to enable communication between the master (\gls{ECU}, \gls{FBU}) and the slaves (\gls{THS}, \gls{MCU}, \gls{FBU}).
 The protocol consists of command and data packets, each of them contains just one byte.
 No error protection measures were taken into account.
@@ -64,7 +66,7 @@ The interfaces between the bus monitor, the reconfiguration controller and the b
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/BusMonitor.pdf}
+    \includegraphics[width=\textwidth]{figures/BusMonitor.pdf}
     \caption{Bus monitor interfacing}\label{fig:BusMonitor}
 \end{figure}
 
