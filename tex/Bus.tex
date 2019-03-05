@@ -70,10 +70,10 @@ The interfaces between the bus monitor, the reconfiguration controller and the b
     \caption{Bus monitor interfacing}\label{fig:BusMonitor}
 \end{figure}
 
-Since the system uses UART as physical communication layer (see section \ref{}), the UART IP (Martin Mosbeck) is used to retrieve data from the bus, which is forwarded to the watchdog unit within the bus monitor module. The watchdog is responsible for error and timeout detection. 
+Since the system uses UART as physical communication layer (see section \ref{sec:communication_link}), the UART IP (Martin Mosbeck) is used to retrieve data from the bus, which is forwarded to the watchdog unit within the bus monitor module. The watchdog is responsible for error and timeout detection. 
 In case of an error or timeout detection, the address of the faulty unit is passed to the reconfiguration controller (using one-hot coding) to trigger a \gls{PR}. 
 A gate circuit is used to pass the \gls{UART} receive (Rx) and transmit (Tx) line to the dynamic area once a reconfiguration was triggered. This is a safety measure to just allow transmission by the \gls{FBU} if a faulty unit has to be replaced. 
 It is assumed, that just one bus participant can be replaced by the \gls{FBU} during system runtime, so once a reconfiguration was done, the bus monitoring is stopped.
 
 The bus monitor is also used to control output pins of the \gls{FBU} if no bus participant has to be replaced, or if a bus participant that doesn't require any output pins is replaced. 
-This is necessary, because the \gls{FPGA} which is used in this test setup pulls (unconfigured) output pins to low, which is not acceptable in our system (see section \ref{}).
+This is necessary, because the \gls{FPGA} which is used in this test setup pulls (unconfigured) output pins to low, which is not acceptable in our system.
