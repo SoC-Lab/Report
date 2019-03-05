@@ -35,3 +35,16 @@ MMCM	&1	     &4	    &25.00\\
     \includegraphics[width=0.75\textwidth]{figures/implementation.pdf}
     \caption{Implemented design, \gls{RP} in the right bottom corner.}\label{fig:implementation}
 \end{figure}
+
+\subsection{Open Issues}
+\begin{itemize}
+    \item Partial reconfiguration fails for one bitstream and results in a voltage drop, see section \ref{sec:voltageDrop}.
+    \item Partial Reconfiguration Controller only works with a manual reset after start-up
+\end{itemize}
+\subsection{Instability of Voltage Supply during \gls{PR}}\label{sec:voltageDrop}
+During the process of partial reconfiguration for the Cortex M1 engine module a voltage drop (2V) occurs on the hardware setup.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/voltageDropPR.jpg}
+    \caption{}\label{fig:voltageDropPR}
+\end{figure}
