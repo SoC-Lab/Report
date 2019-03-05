@@ -48,7 +48,7 @@ Instantiation of the \gls{ICAP} as a hardware primitive in VHDL is documented in
 For completeness sake, the component definition is listed below as it does not exist directly in the documentation.
 The comments the generic parameters that were used in this project.
 \lstset{language=vhdl}
-\begin{lstlisting}
+\begin{lstlisting}[caption={Component definition of the ICAPE2.}]
 component ICAPE2 is
 generic (
     DEVICE_ID   : std_logic_vector(31 downto 0); -- X"23727093" 
@@ -106,9 +106,6 @@ The following modules are included in the \gls{RP}:
 \end{figure}
 \cite{xilinx_vivado_2018-1}, \cite{xilinx_vivado_2018}
 Usage of \gls{ICAP}.
-How is the Zynq still used - Loading images and binary blobs from sd card into DDR.
-What is partially reconfigured - Cortex, uart, IIC.
-Why not use AXI?
 \subsection{Packaged IP}
 The \gls{PR} IP was packaged according to the guide in \cite{xilinx_ug1118-vivado-creating-packaging-custom-ip.pdf_nodate}.
 To avoid naming conflicts, all block designs of the different IPs need to be named differently before this process.
@@ -117,3 +114,19 @@ The module is loaded through the \gls{PR}-Controller IP that is provided by Viva
 This module is connected via the AXI memory interface and loads the partial bitstream from DDR.
 At start-up, the partial bitstreams are loaded form the SD-Card into the DDR through the Zynq \gls{PS} as it already needs to be used for the deactivation of the \gls{PCAP}.
 Figure \ref{fig:prIntegration} shows how the different modules and memory entities are related to each other.
+Listing \ref{lst:addresses} shows the currently assigned address space.
+
+\lstset{language=c}
+\begin{lstlisting}[caption={Address and Length of the partial bitstreams in DDR memory.},
+    label=lst:addresses]
+#define PARTIAL_ECU_ADDR   		0x400000
+#define PARTIAL_THROTTLE_ADDR   0x800000
+#define PARTIAL_ENGINE_ADDR   	0x120000
+#define PARTIAL_BLANK_ADDR   	0x160000
+
+/* In Words */
+#define PARTIAL_ECU_BITFILE_LEN 736718
+#define PARTIAL_THROTTLE_BITFILE_LEN 736718
+#define PARTIAL_ENGINE_BITFILE_LEN 736718
+#define PARTIAL_BLANK_BITFILE_LEN 736718
+\end{lstlisting}

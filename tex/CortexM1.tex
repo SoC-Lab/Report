@@ -21,6 +21,7 @@ Since there is no support for the Xilinx Cortex M1 core, the \gls{BSP} provided 
 The port includes the \gls{RTOS} kernel and the GPIO and UART modules. 
 The firmware for our \gls{FPGA} design \cite{fpga_design} can be found on GitHub \cite{firmware}. 
 For using Mbed OS with a new design, the \gls{BSP} has to be exported from the Vivado SDK and copied to \textit{/mbed-os/targets/TARGET\_Xilinx/TARGET\_XC7Z020/device/standalone\_bsp/} in \cite{firmware}.
+Support for targeting the STM-Boards with \textit{Visual Studio Code} and \textit{gcc} was added due to the code size limitations that are imposed through the Keil platform.
 
 \begin{figure}[ht]
     \centering
